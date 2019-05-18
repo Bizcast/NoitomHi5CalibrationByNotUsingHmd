@@ -38,3 +38,9 @@ sysinfo.txt
 # Jetbrain Rider Cache
 .idea/
 Assets/Plugins/Editor/JetBrains*
+
+# SteamVR Plugin
+SteamVR/
+
+# Noitom Hi5 SDK
+NoitomHi5/
