@@ -41,6 +41,8 @@ Assets/Plugins/Editor/JetBrains*
 
 # SteamVR Plugin
 SteamVR/
+SteamVR.meta
 
 # Noitom Hi5 SDK
 NoitomHi5/
+NoitomHi5.meta
