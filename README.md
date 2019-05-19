@@ -1,5 +1,6 @@
 # NoitomHi5CalibrationByNotUsingHmd
-Noitom Hi5をHMD無しでもキャリブレーションすることができるプロジェクト。
+Noitom Hi5をHMD無しでもキャリブレーションすることができるプロジェクト。  
+![demo](Documents/demo.gif)
 
 ## 概要
 公式から出されているNoitom Hi5の[キャリブレーション用プロジェクト](https://hi5vrglove.com/downloads/unity)は、HMDを被って操作する必要があります。  
@@ -13,26 +14,27 @@ Noitom Hi5のキャリブレーションには本来Vive Controller / Vive Track
 
 ## 使い方
 ### 事前準備
-0. [Steam](https://store.steampowered.com/)から[SteamVR](https://store.steampowered.com/app/250820/SteamVR/)をインストールする ~~（VR Readyではない環境でも必須です）~~。
-0. 本リポジトリをクローンしてサンプルシーンを表示する、または[Releases](https://github.com/Bizcast/NoitomHi5CalibrationByNotUsingHmd/releases)からバイナリをダウンロードする。
+1. [Steam](https://store.steampowered.com/)から[SteamVR](https://store.steampowered.com/app/250820/SteamVR/)をインストールする ~~（VR Readyではない環境でも必須です）~~。
+1. 本リポジトリをクローンしてサンプルシーンを表示する、または[Releases](https://github.com/Bizcast/NoitomHi5CalibrationByNotUsingHmd/releases)からバイナリをダウンロードする。
+1. 本リポジトリをクローンした場合は、[Noitom Hi5 Unity SDK](https://hi5vrglove.com/downloads/unity)と[SteamVR Plugin](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647)をダウンロードしてインポートする。
 
 ### VR Readyな環境の場合
-2. サンプルシーンを再生するかバイナリを実行する。
-2. Vive Controller / Vive Trackerが接続されていることを確認し、**F2キー** を押下してキャリブレーションを開始する。
+4. サンプルシーンを再生するかバイナリを実行する。
+4. Vive Controller / Vive Trackerが接続されていることを確認し、**F2キー** を押下してキャリブレーションを開始する。
 
 ### VR Readyではない環境の場合
-2. 事前にVR Readyな環境でキャリブレーションを行い新規でOpticalDataを生成する。もしVR Readyな環境が無い場合はバイナリに同梱しているOpticalDataを用意する。
-2. 新規で作成したOpticalDataを使用する場合は、`C:\Users\（ユーザ名）\AppData\Roaming\HI5` に生成された `OpticalDeviceBindInfo.xml` ファイルを開き、2組あるHandTypeとSerialNumberを確認する。  
+4. 事前にVR Readyな環境でキャリブレーションを行い新規でOpticalDataを生成する。もしVR Readyな環境が無い場合はバイナリに同梱しているOpticalDataを用意する。
+4. 新規で作成したOpticalDataを使用する場合は、`C:\Users\（ユーザ名）\AppData\Roaming\HI5` に生成された `OpticalDeviceBindInfo.xml` ファイルを開き、2組あるHandTypeとSerialNumberを確認する。  
   同梱しているOpticalDataを使用する場合は、`C:\Users\（ユーザ名）\AppData\Roaming\HI5\OpticalData` にOpticalDataをコピーし 5. に進む。
-2. `C:\Users\（ユーザ名）\AppData\Roaming\HI5\OpticalData` に生成されたOpticalDataのファイル名が 3. で確認したSerialNumberになっているはずなので、そのSerialNumberと対応するHnadTypeにファイル名を変更する。  
+4. `C:\Users\（ユーザ名）\AppData\Roaming\HI5\OpticalData` に生成されたOpticalDataのファイル名が 3. で確認したSerialNumberになっているはずなので、そのSerialNumberと対応するHnadTypeにファイル名を変更する。  
 ファイル名は必ず `LEFT.csv`、`RIGHT.csv` のどちらかになります。
-2. サンプルシーンを再生するかバイナリを実行する。
-2. **F1キー** を押下して **疑似** キャリブレーションを開始する。
+4. サンプルシーンを再生するかバイナリを実行する。
+4. **F1キー** を押下して **疑似** キャリブレーションを開始する。
 
 ### 共通
-7. Bポーズ、Pポーズキャリブレーションを画面の指示に従って行う。
-7. キャリブレーション完了後、 `C:\Users\（ユーザ名）\AppData\Roaming\HI5` 以下にキャリブレーションデータ及びOpticalDataが生成されるため、必要ならばバックアップを取る。
-7. エンジョイ！
+9. Bポーズ、Pポーズキャリブレーションを画面の指示に従って行う。
+9. キャリブレーション完了後、 `C:\Users\（ユーザ名）\AppData\Roaming\HI5` 以下にキャリブレーションデータ及びOpticalDataが生成されるため、必要ならばバックアップを取る。
+9. エンジョイ！
 
 ## 動作環境
 - Unity2018.2.21f1
