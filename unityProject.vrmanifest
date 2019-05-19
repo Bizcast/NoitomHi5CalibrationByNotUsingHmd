@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.noitomhi5calibrationbynotusinghmd.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\karukaru\\Documents\\Github\\NoitomHi5CalibrationByNotUsingHmd\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "NoitomHi5CalibrationByNotUsingHmd [Testing]"
+        }
+      }
+    }
+  ]
+}
