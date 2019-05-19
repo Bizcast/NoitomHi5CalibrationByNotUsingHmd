@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/NoitomHi5CalibrationByNotUsingHmd.unity
+    guid: f92016309ffa08d4a9aa700c3a749d13
   m_configObjects: {}
