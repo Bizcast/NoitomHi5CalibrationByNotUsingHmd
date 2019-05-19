@@ -51,8 +51,8 @@ namespace HI5
         //既存のOpticalDataを送るか否か
         private bool _isPushExistingOpticalData;
 
-        private List<Vector3> _leftPos = new List<Vector3>(), _rightPos = new List<Vector3>();
-        private List<Quaternion> _leftRot = new List<Quaternion>(), _rightRot = new List<Quaternion>();
+        private List<Vector3> _leftPos, _rightPos;
+        private List<Quaternion> _leftRot, _rightRot;
 
         private void OnEnable()
         {
@@ -94,6 +94,8 @@ namespace HI5
 
             //キャリブレーション成功時のイベント登録
             HI5_Calibration.OnCalibrationComplete += HandleCalibrationComplete;
+
+            ResetOpticalDataList(ref _leftPos, ref _rightPos, ref _leftRot, ref _rightRot);
 
             progressBar.gameObject.SetActive(false);
             foreach (var screen in calibrationScreen)
@@ -148,8 +150,17 @@ namespace HI5
             //既存のOpticalDataを読み込む
             if (_isPushExistingOpticalData)
             {
-                GetExistingOpticalData("LEFT.csv", ref _leftPos, ref _leftRot);
-                GetExistingOpticalData("RIGHT.csv", ref _rightPos, ref _rightRot);
+                ResetOpticalDataList(ref _leftPos, ref _rightPos, ref _leftRot, ref _rightRot);
+
+                var leftOd = GetExistingOpticalData("LEFT.csv", ref _leftPos, ref _leftRot);
+                var rightOd = GetExistingOpticalData("RIGHT.csv", ref _rightPos, ref _rightRot);
+
+                //ファイル読み込みに失敗したら弾く
+                if (!leftOd || !rightOd)
+                {
+                    SetDebugMessage("Error! Please Set OpticalData!");
+                    return;
+                }
             }
 
             //BPoseキャリブレーションを開始
@@ -264,10 +275,19 @@ namespace HI5
             }
         }
 
-        private void GetExistingOpticalData(string fileName, ref List<Vector3> pos, ref List<Quaternion> rot)
+        private bool GetExistingOpticalData(string fileName, ref List<Vector3> pos, ref List<Quaternion> rot)
         {
-            var list = ReadFile(fileName);
-            Split(list, ref pos, ref rot);
+            try
+            {
+                var list = ReadFile(fileName);
+                Split(list, ref pos, ref rot);
+                return true;
+            }
+            catch (Exception err)
+            {
+                Debug.LogError(err);
+                return false;
+            }
         }
 
         private List<string> ReadFile(string fileName)
@@ -303,6 +323,15 @@ namespace HI5
         {
             Debug.Log(message);
             debugMessageTextBox.text = message;
+        }
+
+        private void ResetOpticalDataList(ref List<Vector3> leftPos, ref List<Vector3> rightPos,
+            ref List<Quaternion> leftRot, ref List<Quaternion> rightRot)
+        {
+            leftPos = new List<Vector3>();
+            rightPos = new List<Vector3>();
+            leftRot = new List<Quaternion>();
+            rightRot = new List<Quaternion>();
         }
     }
 }
