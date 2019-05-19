@@ -216,7 +216,7 @@ namespace HI5
         //キャリブレーション中の処理
         private IEnumerator CalibrationProgressCheckCoroutine(HI5_Pose hI5Pose)
         {
-            var frame = 0;
+            var frame = -1;
             var calibrationProgress = 0;
             var scale = Vector3.one;
             while (calibrationProgress < 100)
@@ -233,7 +233,7 @@ namespace HI5
 
                 if (hI5Pose == HI5_Pose.BPose && _isPushExistingOpticalData)
                 {
-                    frame = frame++ >= _leftPos.Count ? 0 : frame;
+                    frame = frame++ >= (_leftPos.Count - 1) ? 0 : frame;
 
                     HI5_DataTransform.PushOpticalData("LHR-LEFT", OPTDeviceType.HTC_VIVE_Tracker, _leftPos[frame],
                         _leftRot[frame]);
