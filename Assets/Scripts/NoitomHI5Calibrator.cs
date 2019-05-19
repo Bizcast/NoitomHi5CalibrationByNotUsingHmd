@@ -123,7 +123,7 @@ namespace HI5
                 {
                     if (!SteamVR.active)
                     {
-                        SetDebugMessage("SteamVRが起動していません！");
+                        SetDebugMessage("Error! Please Start SteamVR!");
                         yield return null;
                         continue;
                     }
@@ -141,7 +141,7 @@ namespace HI5
         {
             if (!HI5_Manager.IsConnected || HI5_Manager.GetGloveStatus().Status != GloveStatus.BothGloveAvailable)
             {
-                SetDebugMessage("Noitom Hi5の接続が確立されていません。");
+                SetDebugMessage("Error! Please Connect Noitom Hi5!");
                 return;
             }
 
