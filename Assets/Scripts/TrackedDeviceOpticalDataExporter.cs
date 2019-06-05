@@ -24,11 +24,6 @@ namespace HI5
         {
             _newPosesAction = SteamVR_Events.NewPosesAction(OnNewPoses);
             _steamVrTrackedObject = GetComponent<SteamVR_TrackedObject>();
-
-            if (!Directory.Exists(FolderPath))
-            {
-                Directory.CreateDirectory(FolderPath);
-            }
         }
 
         private void OnEnable()
@@ -72,9 +67,7 @@ namespace HI5
                 return;
 
             var pose = new SteamVR_Utils.RigidTransform(poses[_deviceIndex].mDeviceToAbsoluteTracking);
-
-            File.AppendAllText($@"{FolderPath}/{_deviceSerialNumber}.csv",
-                $"{pose.pos.x:N3},{pose.pos.y:N3},{pose.pos.z:N3},{pose.rot.x:N3},{pose.rot.y:N3},{pose.rot.z:N3},{pose.rot.w:N3}{Environment.NewLine}");
+            ExportOpticalData(pose);
         }
 
         private OPTDeviceType GetDeviceType(uint deviceId)
@@ -91,6 +84,17 @@ namespace HI5
                 default:
                     return OPTDeviceType.Unknown;
             }
+        }
+
+        private void ExportOpticalData(SteamVR_Utils.RigidTransform pose)
+        {
+            if (!Directory.Exists(FolderPath))
+            {
+                Directory.CreateDirectory(FolderPath);
+            }
+
+            File.AppendAllText($@"{FolderPath}/{_deviceSerialNumber}.csv",
+                $"{pose.pos.x:N3},{pose.pos.y:N3},{pose.pos.z:N3},{pose.rot.x:N3},{pose.rot.y:N3},{pose.rot.z:N3},{pose.rot.w:N3}{Environment.NewLine}");
         }
     }
 }
