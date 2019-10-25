@@ -23,14 +23,17 @@ namespace HI5
         //デフォで出力
         [SerializeField] private bool isOutputCalibrationProgress = true;
 
-        //デバッグメッセージを出力するText
-        [SerializeField] private Text debugMessageTextBox;
+        //強制成功オプション
+        [SerializeField] private Toggle forcedSuccessOptionToggle;
 
         //カウントダウンを行うやつ
         [SerializeField] private CountDown countDown;
 
         //キャリブレーション進行度のバー
         [SerializeField] private Transform progressBar;
+
+        //デバッグメッセージを出力するText
+        [SerializeField] private Text debugMessageTextBox;
 
         //各キャリブレーションポーズの画面
         [SerializeField] private List<GameObject> calibrationScreen = new List<GameObject>();
@@ -264,6 +267,13 @@ namespace HI5
             switch (hi5Pose)
             {
                 case HI5_Pose.BPose:
+                    //条件不明でキャリブレーション結果が必ず BPoseCalibrationErrors.BE_WrongBPoseAction になる場合があるため、オプションでこのエラーを無視する
+                    if (HI5_Manager.GetGloveStatus().BposErr == BPoseCalibrationErrors.BE_WrongBPoseAction &&
+                        forcedSuccessOptionToggle.isOn)
+                    {
+                        HI5_Manager.GetGloveStatus().BposErr = BPoseCalibrationErrors.BE_CalibratedOK;
+                    }
+
                     //SetDebugMessage("BPose Calibration Complete!");
                     State = HI5_Pose.PPose;
                     break;
